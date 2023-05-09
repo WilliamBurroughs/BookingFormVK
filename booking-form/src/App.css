@@ -1,0 +1,106 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.booking-form__title {
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 24px;
+
+  position: relative;
+}
+
+/* .booking-form__title::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 100%;
+  height: 1px;
+  background-color: rgb(84, 77, 77);
+} */
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  background-color: aliceblue;
+  padding: 60px;
+  width: 800px;
+}
+
+.booking-form__label {
+  font-size: 18px;
+}
+
+.booking-form {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.booking-form__select-room,
+.booking-form__select-floor,
+.booking-form__select-tower {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.booking-form__label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+.booking-form textarea {
+  resize: none;
+  border: none;
+  background-color: white;
+}
+
+.booking-form__date-row {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+.booking-form__date {
+  width: 100%;
+}
+.booking-form input[type="date"],
+.booking-form input[type="time"],
+.booking-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  /* border-radius: 5px; */
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: #f6f6f6;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.booking-form__submit,
+.booking-form__reset {
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  background-color: #4caf50;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.booking-form__reset {
+  background-color: #f44336;
+}
