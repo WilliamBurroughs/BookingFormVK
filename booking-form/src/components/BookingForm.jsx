@@ -1,19 +1,39 @@
 import React, { useState } from "react";
 // import CustomButton from "./UI/button/CustomButton";
 import CustomSelect from "./UI/select/CustomSelect";
-import DateTimePicker from "./UI/dataPicker/DataTimePicker";
+
 export const BookingForm = () => {
-  const [tower, setTower] = useState("A");
-  const [floor, setFloor] = useState("3");
-  const [room, setRoom] = useState("1");
+  const optionsTime = Array.from({ length: 15 }, (_, i) => ({
+    value: `${i + 8}:00`,
+    label: `${i + 8}:00`,
+  }));
+
+  const optionsTower = [
+    { value: "Башня A", label: "Башня А" },
+    { value: "Башня Б", label: "Башня Б" },
+  ];
+
+  const optionsFloor = Array.from({ length: 25 }, (_, i) => ({
+    value: `Этаж ${i + 3}`,
+    label: `Этаж ${i + 3}`,
+  }));
+  const optionsRoom = Array.from({ length: 10 }, (_, i) => ({
+    value: `Комната ${i + 1}`,
+    label: `Комната ${i + 1}`,
+  }));
+
+  const [tower, setTower] = useState("");
+  const [floor, setFloor] = useState("");
+  const [room, setRoom] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [comment, setComment] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+  const [startTime, setStartTime] = useState(optionsTime[0].value);
+  const [endTime, setEndTime] = useState(optionsTime[1].value);
 
   const handleTowerChange = (selectedOption) => {
     setTower(selectedOption.value);
   };
+
   const handleFloorChange = (selectedOption) => {
     setFloor(selectedOption.value);
   };
@@ -26,6 +46,7 @@ export const BookingForm = () => {
   const handleStartTimeChange = (selectedOption) => {
     setStartTime(selectedOption.value);
   };
+
   const handleEndTimeChange = (selectedOption) => {
     setEndTime(selectedOption.value);
   };
@@ -49,11 +70,12 @@ export const BookingForm = () => {
   };
 
   const handleReset = () => {
-    setTower("A");
-    setFloor("3");
-    setRoom("1");
+    setTower(null);
+    setFloor(null);
+    setRoom(null);
     setDate(new Date().toISOString().split("T")[0]);
-
+    setStartTime(optionsTime[0].value);
+    setEndTime(optionsTime[1].value);
     setComment("");
   };
 
@@ -64,38 +86,46 @@ export const BookingForm = () => {
       </div>
 
       <div className="booking-form__select-tower select">
+        <label>Выбор башни</label>
         <CustomSelect
           isRequired={true}
+          value={{ value: tower, label: tower }}
           onChange={handleTowerChange}
-          options={[
-            { value: "A", label: "Башня А" },
-            { value: "B", label: "Башня Б" },
-          ]}
+          options={optionsTower.map((option) => ({
+            value: option.value,
+            label: option.label,
+          }))}
           placeholder="Выберите башню"
         />
       </div>
       <div className="booking-form__select-floor select">
+        <label>Выбор этажа</label>
         <CustomSelect
+          isRequired={true}
+          value={{ value: floor, label: floor }}
           onChange={handleFloorChange}
-          options={Array.from({ length: 25 }, (_, i) => ({
-            value: i + 3,
-            label: `Этаж ${i + 3}`,
+          options={optionsFloor.map((option) => ({
+            value: option.value,
+            label: option.label,
           }))}
           placeholder="Выберите этаж"
         />
       </div>
       <div className="booking-form__select-room select">
+        <label>Выбор комнаты</label>
         <CustomSelect
+          isRequired={true}
+          value={{ value: room, label: room }}
           onChange={handleRoomChange}
-          options={Array.from({ length: 10 }, (_, i) => ({
-            value: i + 1,
-            label: `Комната ${i + 1}`,
+          options={optionsRoom.map((option) => ({
+            value: option.value,
+            label: option.label,
           }))}
           placeholder="Выберите комнату"
         />
       </div>
       <div className="booking-form__date date">
-        <div className="date__title">Выберите дату</div>
+        <label>Дата встречи</label>
         <input
           id="date"
           type="date"
@@ -108,20 +138,22 @@ export const BookingForm = () => {
 
         <CustomSelect
           onChange={handleStartTimeChange}
-          options={Array.from({ length: 15 }, (_, i) => ({
-            value: `${i + 8}:00`,
-            label: `${i + 8}:00`,
+          value={{ value: startTime, label: startTime }}
+          options={optionsTime.map((option) => ({
+            value: option.value,
+            label: option.label,
           }))}
-          placeholder="Выберите комнату"
+          placeholder="Выберите время начала встречи"
         />
         <div>до</div>
         <CustomSelect
           onChange={handleEndTimeChange}
-          options={Array.from({ length: 15 }, (_, i) => ({
-            value: `${i + 8}:00`,
-            label: `${i + 8}:00`,
+          value={{ value: endTime, label: endTime }}
+          options={optionsTime.map((option) => ({
+            value: option.value,
+            label: option.label,
           }))}
-          placeholder="Выберите комнату"
+          placeholder="Выберите время конца встречи"
         />
       </div>
 
@@ -141,7 +173,7 @@ export const BookingForm = () => {
         type="button"
         onClick={handleReset}
       >
-        Отчистить
+        Сбросить
       </button>
     </form>
   );

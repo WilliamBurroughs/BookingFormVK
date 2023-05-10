@@ -28,7 +28,14 @@ const CustomSelect = ({ options, isRequired, ...props }) => {
     }),
   };
 
-  return <Select {...props} options={options} styles={customStyles} required />;
+  return (
+    <Select
+      {...props}
+      options={options}
+      styles={customStyles}
+      required={isRequired}
+    />
+  );
 };
 
 export default CustomSelect;
